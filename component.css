@@ -1,0 +1,299 @@
+#wellnessroad-gwangalli-map {
+  color: var(--foreground);
+  width: 100%;
+}
+
+#wellnessroad-gwangalli-map .route-summary {
+  justify-content: flex-start;
+  gap: 0.65rem;
+  margin: 0 0 0.4rem;
+}
+
+#wellnessroad-gwangalli-map .map-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 430px;
+  overflow: hidden;
+}
+
+#wellnessroad-gwangalli-map .route-map {
+  display: block;
+  width: 100%;
+  height: 430px;
+  overflow: hidden;
+}
+
+#wellnessroad-gwangalli-map .map-road-major {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1.5;
+  opacity: 0.9;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-road-local {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 0.8;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-walk {
+  fill: none;
+  stroke: var(--muted-foreground);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 3;
+  opacity: 0.45;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-coast {
+  fill: none;
+  stroke: var(--viz-series-2);
+  stroke-width: 1.1;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-water {
+  fill: var(--viz-series-2);
+  fill-opacity: 0.11;
+  stroke: var(--viz-series-2);
+  stroke-opacity: 0.25;
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-beach {
+  fill: var(--viz-series-3);
+  fill-opacity: 0.13;
+  stroke: var(--viz-series-3);
+  stroke-opacity: 0.3;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .map-park {
+  fill: var(--green);
+  fill-opacity: 0.11;
+  stroke: var(--green);
+  stroke-opacity: 0.25;
+  stroke-width: 0.7;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .route-halo {
+  fill: none;
+  stroke: var(--background);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .route-line {
+  fill: none;
+  stroke: var(--viz-series-1);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .stop-group {
+  cursor: pointer;
+  outline: none;
+}
+
+#wellnessroad-gwangalli-map .stop-shape {
+  stroke: var(--background);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .stop-group:focus .stop-shape {
+  stroke: var(--ring);
+  stroke-width: 4;
+}
+
+#wellnessroad-gwangalli-map .stop-number {
+  fill: var(--background);
+  font-size: 11px;
+  font-weight: 500;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+#wellnessroad-gwangalli-map .selected-ring {
+  fill: none;
+  stroke: var(--foreground);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+#wellnessroad-gwangalli-map .selected-label {
+  fill: var(--foreground);
+  stroke: var(--background);
+  stroke-width: 4;
+  paint-order: stroke;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+#wellnessroad-gwangalli-map .map-legend {
+  justify-content: flex-start;
+  gap: 0.85rem;
+  margin: 0.25rem 0 0.75rem;
+}
+
+#wellnessroad-gwangalli-map .legend-shape {
+  font-weight: 500;
+}
+
+#wellnessroad-gwangalli-map .legend-start { color: var(--viz-series-1); }
+#wellnessroad-gwangalli-map .legend-activity { color: var(--viz-series-2); }
+#wellnessroad-gwangalli-map .legend-rest { color: var(--viz-series-3); }
+#wellnessroad-gwangalli-map .legend-snack { color: var(--viz-series-4); }
+#wellnessroad-gwangalli-map .legend-finish { color: var(--viz-series-5); }
+
+#wellnessroad-gwangalli-map .selected-stop {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 0.6rem;
+  align-items: baseline;
+  margin-bottom: 0.7rem;
+  padding: 0.9rem;
+}
+
+#wellnessroad-gwangalli-map #selected-location,
+#wellnessroad-gwangalli-map #selected-activity {
+  grid-column: 2;
+}
+
+#wellnessroad-gwangalli-map .stop-button {
+  text-align: left;
+}
+
+#wellnessroad-gwangalli-map tr.is-selected {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+#wellnessroad-gwangalli-map .route-warning {
+  margin: 0.7rem 0 0;
+}
+
+#wellnessroad-gwangalli-map .map-source {
+  margin: 0.35rem 0 0;
+}
+
+@media (max-width: 520px) {
+  #wellnessroad-gwangalli-map .map-wrap,
+  #wellnessroad-gwangalli-map .route-map {
+    min-height: 390px;
+    height: 390px;
+  }
+
+  #wellnessroad-gwangalli-map .selected-stop {
+    grid-template-columns: 1fr;
+  }
+
+  #wellnessroad-gwangalli-map #selected-location,
+  #wellnessroad-gwangalli-map #selected-activity {
+    grid-column: 1;
+
+/* ===== 코스맵 모바일 표 가독성 개선 ===== */
+@media (max-width: 600px) {
+
+  #wellnessroad-gwangalli-map .table-responsive {
+    overflow: visible;
+  }
+
+  #wellnessroad-gwangalli-map .table {
+    width: 100%;
+  }
+
+  /* 모바일에서는 표 제목줄 숨기기 */
+  #wellnessroad-gwangalli-map .table thead {
+    display: none;
+  }
+
+  #wellnessroad-gwangalli-map .table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  /* 한 지점을 하나의 카드처럼 표시 */
+  #wellnessroad-gwangalli-map .table tbody tr {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 12px 14px;
+    border: 1px solid #d9e2df;
+    border-radius: 12px;
+    background: #ffffff;
+  }
+
+  /* 선택된 지점 */
+  #wellnessroad-gwangalli-map .table tbody tr.is-selected {
+    background: #e8f5f3;
+  }
+
+  /* 모든 셀 기본값 */
+  #wellnessroad-gwangalli-map .table tbody td {
+    display: block;
+    width: 100% !important;
+    padding: 4px 0;
+    border: 0;
+    text-align: left;
+    white-space: normal !important;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    line-height: 1.55;
+    font-size: 13px;
+  }
+
+  /* 핀 + 시간은 한 줄 */
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(1),
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(2) {
+    display: inline-block;
+    width: auto !important;
+    margin-right: 12px;
+    font-weight: 700;
+  }
+
+  /* 지점 */
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(3) {
+    margin-top: 7px;
+    font-weight: 700;
+  }
+
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(3)::before {
+    content: "지점  ";
+    font-size: 11px;
+    font-weight: 600;
+    color: #777;
+  }
+
+  /* 활동 */
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(4) {
+    margin-top: 5px;
+    color: #444;
+  }
+
+  #wellnessroad-gwangalli-map .table tbody td:nth-child(4)::before {
+    content: "활동  ";
+    font-size: 11px;
+    font-weight: 600;
+    color: #777;
+  }
+
+  /* 혹시 GPS 5번째 칸이 남아 있어도 모바일에서는 숨김 */
+  #wellnessroad-gwangalli-map .table th:nth-child(5),
+  #wellnessroad-gwangalli-map .table td:nth-child(5) {
+    display: none !important;
+  }
+}

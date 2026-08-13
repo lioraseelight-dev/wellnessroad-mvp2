@@ -1,0 +1,25 @@
+{
+  "name": "부산 5색 웰니스 워크",
+  "short_name": "5색웰니스워크",
+  "description": "부산의 바다를 걷다, 나를 회복하다 — 댕댕오감학교 & K-웰니스 부산워크 예약 플랫폼",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FBF8F3",
+  "theme_color": "#FBF8F3",
+  "orientation": "portrait-primary",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "images/logo-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/logo-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}

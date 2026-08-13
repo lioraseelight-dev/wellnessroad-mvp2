@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>OSAEK.W (오색.W)-부산 5색 월니스 워크 | 준비 중입니다</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/logo-icon.png">
+<link rel="apple-touch-icon" href="images/logo-icon.png">
+<meta name="theme-color" content="#FBF8F3">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body{ background:linear-gradient(160deg, #FBF8F3 0%, #FFF6EE 55%, #EAF6F6 100%); min-height:100vh; }
+  .gate-wrap{
+    min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px;
+  }
+  .gate-box{
+    background:#fff; border-radius:24px; box-shadow:0 20px 50px rgba(43,43,43,.1); padding:48px 40px;
+    max-width:440px; width:100%; text-align:center;
+  }
+  .gate-box img{ width:64px; height:64px; border-radius:50%; margin:0 auto 20px; }
+  .gate-box h1{ font-size:22px; margin-bottom:10px; }
+  .gate-box p.desc{ color:#8a8375; font-size:14.5px; margin-bottom:28px; line-height:1.7; }
+  .gate-box .form-control{ text-align:center; letter-spacing:.02em; }
+  .gate-error{ color:#c2542e; font-size:13px; margin-top:10px; display:none; }
+  .gate-badge{
+    display:inline-flex; align-items:center; gap:6px; background:rgba(46,139,139,.1); color:var(--teal);
+    padding:6px 14px; border-radius:999px; font-size:12.5px; font-weight:700; margin-bottom:18px;
+  }
+</style>
+</head>
+<body>
+<div class="gate-wrap">
+  <div class="gate-box">
+    <img src="images/logo-icon.png" alt="OSAEK.W (오색.W)-부산 5색 월니스 워크 로고">
+    <span class="gate-badge"><i class="fa-solid fa-hourglass-half"></i> Private Preview</span>
+    <h1>공개 준비 중입니다</h1>
+    <p class="desc">
+      OSAEK.W (오색.W)-부산 5색 월니스 워크는 현재 시범 운영을 준비하며 내부 점검 중입니다.<br>
+      초대받은 링크(접속 코드)가 있으신 분은 아래에 입력해 미리보기를 확인하실 수 있습니다.
+    </p>
+    <form id="gateAccessForm">
+      <div class="form-group" style="margin-bottom:16px;">
+        <input type="password" id="gateAccessCode" class="form-control" placeholder="접속 코드를 입력하세요" autocomplete="off">
+      </div>
+      <button type="submit" class="btn btn-navy btn-block">미리보기 입장</button>
+      <div class="gate-error" id="gateAccessError">접속 코드가 올바르지 않습니다.</div>
+    </form>
+    <p style="margin-top:26px; font-size:12.5px; color:#b3ac9c;">문의: 서비스 담당자에게 접속 코드를 요청해 주세요.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  const ACCESS_CODE = 'bw-preview-2026'; // js/site-gate.js 와 동일한 값으로 유지하세요
+  const STORAGE_KEY = 'bw_site_access_ok';
+
+  document.getElementById('gateAccessForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const val = document.getElementById('gateAccessCode').value.trim();
+    const errEl = document.getElementById('gateAccessError');
+    if (val === ACCESS_CODE) {
+      try { localStorage.setItem(STORAGE_KEY, '1'); } catch (err) {}
+      const redirectTo = sessionStorage.getItem('bw_redirect_after_gate') || 'index.html';
+      window.location.href = redirectTo;
+    } else {
+      errEl.style.display = 'block';
+    }
+  });
+})();
+</script>
+</body>
+</html>

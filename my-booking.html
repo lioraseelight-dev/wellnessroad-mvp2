@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<script src="js/site-gate.js"></script>
+<title>예약 조회 | OSAEK.W (오색.W)</title>
+<meta name="description" content="예약번호와 연락처 뒤 4자리로 나의 예약을 조회하고 취소할 수 있습니다.">
+<link rel="icon" href="images/logo-icon.png">
+<link rel="apple-touch-icon" href="images/logo-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FBF8F3">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="my">
+<a href="#main" class="skip-link">본문으로 바로가기</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="images/logo-icon.png" alt="OSAEK.W (오색.W) 로고">
+      <span>OSAEK.W (오색.W)<br><span class="brand-name-en">Busan 5-Color Wellness Walk</span></span>
+    </a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <ul class="gnb-links">
+        <li><a href="index.html" data-nav="home" data-i18n="nav_home">홈</a></li>
+        <li><a href="course-a.html" data-nav="courses" data-i18n="nav_courses">코스 소개</a></li>
+        <li><a href="booking.html" data-nav="booking" data-i18n="nav_booking">예약하기</a></li>
+        <li><a href="my-booking.html" data-nav="my" data-i18n="nav_my">예약 조회</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="언어 선택">
+        <button type="button" data-lang="ko">KO</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="booking.html" class="header-cta" data-i18n="header_cta">지금 예약하기</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-top:44px;">
+    <div class="container">
+      <h1 class="section-title" data-i18n="page_title">예약 조회</h1>
+      <p class="section-desc" data-i18n="page_desc">예약번호와 연락처 뒤 4자리를 입력해 예약 내역을 확인하세요</p>
+
+      <form class="lookup-form" id="lookupForm">
+        <div class="form-group">
+          <label for="lookupBookingNo" data-i18n="lbl_booking_no">예약번호</label>
+          <input type="text" id="lookupBookingNo" class="form-control" placeholder="BW-260718-001" required>
+        </div>
+        <div class="form-group">
+          <label for="lookupPhone4" data-i18n="lbl_phone4">연락처 뒤 4자리</label>
+          <input type="text" id="lookupPhone4" class="form-control" maxlength="4" inputmode="numeric" placeholder="1234" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="btn_lookup">조회하기</button>
+        <div id="lookupError" style="color:#c2542e; font-size:13.5px; margin-top:10px; display:none;" data-i18n="err_not_found">일치하는 예약을 찾을 수 없습니다. 예약번호와 연락처를 다시 확인해 주세요.</div>
+      </form>
+
+      <div id="resultArea"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-brand">OSAEK.W (오색.W)</div>
+    <div data-i18n="footer_org">모두의 창업 1기 시범 운영 서비스</div>
+    <div data-i18n="footer_contact">문의 이메일: (추후 기입)</div>
+    <div data-i18n="footer_copy">© 2026 OSAEK.W (오색.W)</div>
+  </div>
+</footer>
+
+<nav class="bottom-tabbar" aria-label="하단 탭 메뉴">
+  <a href="index.html" data-nav="home"><i class="fa-solid fa-house"></i><span data-i18n="tab_home">홈</span></a>
+  <a href="course-a.html" data-nav="courses"><i class="fa-solid fa-water"></i><span data-i18n="tab_courses">코스</span></a>
+  <a href="booking.html" data-nav="booking"><i class="fa-solid fa-calendar-check"></i><span data-i18n="tab_booking">예약</span></a>
+  <a href="my-booking.html" data-nav="my"><i class="fa-solid fa-ticket"></i><span data-i18n="tab_my">내 예약</span></a>
+</nav>
+
+<script>
+window.PAGE_DICT = {
+  ko: {
+    page_title:'예약 조회', page_desc:'예약번호와 연락처 뒤 4자리를 입력해 예약 내역을 확인하세요',
+    lbl_booking_no:'예약번호', lbl_phone4:'연락처 뒤 4자리', btn_lookup:'조회하기',
+    err_not_found:'일치하는 예약을 찾을 수 없습니다. 예약번호와 연락처를 다시 확인해 주세요.',
+    result_course:'코스', result_date:'날짜', result_people:'인원', result_applicant:'신청자', result_phone:'연락처',
+    result_status_confirmed:'확정', result_status_cancelled:'취소됨', btn_cancel:'예약 취소', cancel_confirm:'정말로 이 예약을 취소하시겠습니까?',
+    cancel_done:'예약이 취소되었습니다.',
+    course_a_name:'코스 A · 댕댕오감학교', course_b_name:'코스 B · K-웰니스 부산워크'
+  },
+  en: {
+    page_title:'My Booking', page_desc:'Enter your booking number and the last 4 digits of your phone number',
+    lbl_booking_no:'Booking Number', lbl_phone4:'Last 4 digits of phone', btn_lookup:'Search',
+    err_not_found:'No matching booking found. Please check your booking number and phone number again.',
+    result_course:'Course', result_date:'Date', result_people:'Participants', result_applicant:'Applicant', result_phone:'Contact',
+    result_status_confirmed:'Confirmed', result_status_cancelled:'Cancelled', btn_cancel:'Cancel Booking', cancel_confirm:'Are you sure you want to cancel this booking?',
+    cancel_done:'Your booking has been cancelled.',
+    course_a_name:'Course A · Doggie Sensory School', course_b_name:'Course B · K-Wellness Busan Walk'
+  }
+};
+</script>
+<script src="js/common.js"></script>
+<script src="js/my-booking.js"></script>
+</body>
+</html>

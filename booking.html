@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<script src="js/site-gate.js"></script>
+<title>예약하기 | OSAEK.W (오색.W)</title>
+<meta name="description" content="댕댕오감학교, K-웰니스 부산워크 예약 신청. 코스와 날짜를 선택하고 5단계로 간편하게 예약하세요.">
+<link rel="icon" href="images/logo-icon.png">
+<link rel="apple-touch-icon" href="images/logo-icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#FBF8F3">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="booking">
+<a href="#main" class="skip-link">본문으로 바로가기</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="images/logo-icon.png" alt="OSAEK.W (오색.W) 로고">
+      <span>OSAEK.W (오색.W)<br><span class="brand-name-en">Busan 5-Color Wellness Walk</span></span>
+    </a>
+    <nav class="gnb" aria-label="주요 메뉴">
+      <ul class="gnb-links">
+        <li><a href="index.html" data-nav="home" data-i18n="nav_home">홈</a></li>
+        <li><a href="course-a.html" data-nav="courses" data-i18n="nav_courses">코스 소개</a></li>
+        <li><a href="booking.html" data-nav="booking" data-i18n="nav_booking">예약하기</a></li>
+        <li><a href="my-booking.html" data-nav="my" data-i18n="nav_my">예약 조회</a></li>
+      </ul>
+      <div class="lang-toggle" role="group" aria-label="언어 선택">
+        <button type="button" data-lang="ko">KO</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+      <a href="booking.html" class="header-cta" data-i18n="header_cta">지금 예약하기</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section" style="padding-top:44px;">
+    <div class="container booking-wrap">
+      <h1 class="section-title" data-i18n="page_title" style="margin-bottom:30px;">예약하기</h1>
+
+      <div class="step-indicator">
+        <div class="ind"><div class="circ">1</div><span class="label" data-i18n="ind1">코스</span></div>
+        <div class="ind"><div class="circ">2</div><span class="label" data-i18n="ind2">날짜</span></div>
+        <div class="ind"><div class="circ">3</div><span class="label" data-i18n="ind3">인원/정보</span></div>
+        <div class="ind"><div class="circ">4</div><span class="label" data-i18n="ind4">신청자</span></div>
+        <div class="ind"><div class="circ">5</div><span class="label" data-i18n="ind5">완료</span></div>
+      </div>
+
+      <!-- STEP 1: 코스 선택 -->
+      <div class="booking-panel" data-step="1">
+        <h2 data-i18n="s1_title">코스를 선택해 주세요</h2>
+        <p class="panel-desc" data-i18n="s1_desc">두 코스 중 참여하실 프로그램을 골라주세요</p>
+        <div class="course-select-grid">
+          <div class="course-select-card" data-course="A">
+            <img src="images/hero-course-a.jpg" alt="댕댕오감학교 - 광안리 해변 반려견 산책" loading="lazy">
+            <h3 data-i18n="course_a_name">코스 A · 댕댕오감학교</h3>
+            <p data-i18n="course_a_sub">토요일 09:00 · 1인+1견 35,000원</p>
+          </div>
+          <div class="course-select-card" data-course="B">
+            <img src="images/hero-course-b.jpg" alt="K-웰니스 부산워크 - 동백섬 한복 산책" loading="lazy">
+            <h3 data-i18n="course_b_name">코스 B · K-웰니스 부산워크</h3>
+            <p data-i18n="course_b_sub">화·목·금 14:00 · 1인 120,000원</p>
+          </div>
+        </div>
+        <div class="step-nav" style="margin-top:26px;">
+          <button type="button" class="btn btn-primary btn-block" id="step1NextBtn" disabled data-i18n="btn_next">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: 날짜 선택 -->
+      <div class="booking-panel" data-step="2" style="display:none;">
+        <h2 data-i18n="s2_title">날짜를 선택해 주세요</h2>
+        <p class="panel-desc" data-i18n="s2_desc">활성화된 날짜만 예약할 수 있습니다. 잔여석을 확인하세요.</p>
+        <div class="calendar" id="calendarWrap"></div>
+        <div class="selected-date-banner" id="selectedDateBanner" style="display:none;">
+          <i class="fa-solid fa-calendar-check"></i><span></span>
+        </div>
+        <div class="step-nav" style="margin-top:22px;">
+          <button type="button" class="btn btn-outline" id="step2BackBtn" data-i18n="btn_back">이전</button>
+          <button type="button" class="btn btn-primary" id="step2NextBtn" disabled data-i18n="btn_next">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: 인원 + 조건부 필드 -->
+      <div class="booking-panel" data-step="3" style="display:none;">
+        <h2 data-i18n="s3_title">인원 및 세부 정보</h2>
+        <p class="panel-desc" data-i18n="s3_desc">코스에 필요한 정보를 입력해 주세요</p>
+
+        <div class="form-group">
+          <label for="peopleInput" data-i18n="lbl_people">인원 (팀/명)</label>
+          <input type="number" id="peopleInput" class="form-control" min="1" max="4" value="1">
+          <div class="hint" id="peopleHint"></div>
+        </div>
+
+        <!-- 코스A 전용 필드 -->
+        <div id="petFields" style="display:none;">
+          <div class="form-group">
+            <label for="petName" data-i18n="lbl_pet_name">반려견 이름</label>
+            <input type="text" id="petName" class="form-control" data-i18n-placeholder="ph_pet_name" placeholder="예: 콩이">
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group">
+            <label for="petBreed" data-i18n="lbl_pet_breed">견종</label>
+            <input type="text" id="petBreed" class="form-control" data-i18n-placeholder="ph_pet_breed" placeholder="예: 말티즈">
+          </div>
+          <div class="form-group" id="petSizeGroup">
+            <label data-i18n="lbl_pet_size">반려견 크기</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill"><input type="radio" name="petSize" value="소형"><span data-i18n="size_small">소형</span></label>
+              <label class="radio-pill"><input type="radio" name="petSize" value="중형"><span data-i18n="size_medium">중형</span></label>
+              <label class="radio-pill"><input type="radio" name="petSize" value="대형"><span data-i18n="size_large">대형 (사전 문의)</span></label>
+            </div>
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group" id="petVaccinatedGroup">
+            <div class="checkbox-row">
+              <input type="checkbox" id="petVaccinated">
+              <label for="petVaccinated" data-i18n="lbl_pet_vaccinated">반려견 예방접종을 완료했으며, 발정기·공격성 이력이 없습니다 (필수)</label>
+            </div>
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group" id="petSocialityGroup">
+            <label data-i18n="lbl_pet_sociality">다른 강아지와의 사회성</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill"><input type="radio" name="petSociality" value="좋음"><span data-i18n="soc_good">좋음</span></label>
+              <label class="radio-pill"><input type="radio" name="petSociality" value="보통"><span data-i18n="soc_normal">보통</span></label>
+              <label class="radio-pill"><input type="radio" name="petSociality" value="낯가림"><span data-i18n="soc_shy">낯가림</span></label>
+            </div>
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+        </div>
+
+        <!-- 코스B 전용 필드 -->
+        <div id="foreignerFields" style="display:none;">
+          <div class="form-group">
+            <label for="nationality" data-i18n="lbl_nationality">국적</label>
+            <select id="nationality" class="form-control">
+              <option value="">-- <span data-i18n="opt_select">선택</span> --</option>
+              <option>대한민국</option><option>United States</option><option>Japan</option><option>China</option>
+              <option>Singapore</option><option>Australia</option><option>United Kingdom</option><option>Germany</option>
+              <option>France</option><option>Canada</option><option>Vietnam</option><option>Thailand</option><option data-i18n="opt_other">기타</option>
+            </select>
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="lbl_guide_lang">안내 언어</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill"><input type="radio" name="guideLanguage" value="English" checked><span>English</span></label>
+              <label class="radio-pill"><input type="radio" name="guideLanguage" value="日本語" disabled><span data-i18n="lang_jp">日本語 (준비 중)</span></label>
+              <label class="radio-pill"><input type="radio" name="guideLanguage" value="中文" disabled><span data-i18n="lang_cn">中文 (준비 중)</span></label>
+            </div>
+          </div>
+          <div class="form-group" id="hanbokSizeGroup">
+            <label data-i18n="lbl_hanbok_size">한복 사이즈</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill"><input type="radio" name="hanbokSize" value="S"><span>S</span></label>
+              <label class="radio-pill"><input type="radio" name="hanbokSize" value="M"><span>M</span></label>
+              <label class="radio-pill"><input type="radio" name="hanbokSize" value="L"><span>L</span></label>
+              <label class="radio-pill"><input type="radio" name="hanbokSize" value="XL"><span>XL</span></label>
+            </div>
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group">
+            <label data-i18n="lbl_diet">식이 제한</label>
+            <div class="radio-pill-group">
+              <label class="radio-pill"><input type="radio" name="dietRestriction" value="없음" checked><span data-i18n="diet_none">없음</span></label>
+              <label class="radio-pill"><input type="radio" name="dietRestriction" value="베지테리언"><span data-i18n="diet_veg">베지테리언</span></label>
+              <label class="radio-pill"><input type="radio" name="dietRestriction" value="비건"><span data-i18n="diet_vegan">비건</span></label>
+              <label class="radio-pill"><input type="radio" name="dietRestriction" value="할랄"><span data-i18n="diet_halal">할랄</span></label>
+              <label class="radio-pill"><input type="radio" name="dietRestriction" value="기타"><span data-i18n="diet_etc">기타</span></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-nav" style="margin-top:10px;">
+          <button type="button" class="btn btn-outline" id="step3BackBtn" data-i18n="btn_back">이전</button>
+          <button type="button" class="btn btn-primary" id="step3NextBtn" data-i18n="btn_next">다음</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: 신청자 정보 -->
+      <div class="booking-panel" data-step="4" style="display:none;">
+        <h2 data-i18n="s4_title">신청자 정보</h2>
+        <p class="panel-desc" data-i18n="s4_desc">예약 확인을 위한 연락처를 입력해 주세요</p>
+
+        <div class="form-group">
+          <label for="applicantName" data-i18n="lbl_name">이름</label>
+          <input type="text" id="applicantName" class="form-control">
+          <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="applicantPhone" data-i18n="lbl_phone">연락처</label>
+            <input type="tel" id="applicantPhone" class="form-control" data-i18n-placeholder="ph_phone" placeholder="010-0000-0000">
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+          <div class="form-group">
+            <label for="applicantEmail" data-i18n="lbl_email">이메일</label>
+            <input type="email" id="applicantEmail" class="form-control" data-i18n-placeholder="ph_email" placeholder="name@email.com">
+            <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+          </div>
+        </div>
+        <div class="form-group" id="consentGroup">
+          <div class="checkbox-row">
+            <input type="checkbox" id="applicantConsent">
+            <label for="applicantConsent" data-i18n="lbl_consent">개인정보 수집 및 이용에 동의합니다 (필수)</label>
+          </div>
+          <div class="error-text" data-i18n="err_required">필수 입력 항목입니다.</div>
+        </div>
+        <div class="notice-box">
+          <i class="fa-solid fa-circle-info"></i>
+          <span data-i18n="notice_payment">본 예약은 시범 운영 신청이며, 결제는 현장에서 진행됩니다.</span>
+        </div>
+
+        <div class="step-nav" style="margin-top:20px;">
+          <button type="button" class="btn btn-outline" id="step4BackBtn" data-i18n="btn_back">이전</button>
+          <button type="button" class="btn btn-primary" id="step4SubmitBtn" data-i18n="btn_submit">예약 신청하기</button>
+        </div>
+      </div>
+
+      <!-- STEP 5: 완료 -->
+      <div class="booking-panel" data-step="5" style="display:none;">
+        <div class="booking-no-box">
+          <i class="fa-solid fa-circle-check" style="font-size:30px;"></i>
+          <div style="margin-top:8px; font-weight:700;" data-i18n="s5_title">예약이 완료되었습니다</div>
+          <div class="no" id="summaryBookingNo">BW-000000-000</div>
+          <div style="font-size:13.5px; opacity:.9;" data-i18n="s5_hint">예약 조회 페이지에서 예약번호로 확인할 수 있습니다</div>
+        </div>
+        <div class="summary-card" id="summaryTable"></div>
+        <div class="step-nav" style="margin-top:22px;">
+          <a href="my-booking.html" class="btn btn-outline" data-i18n="btn_goto_my">예약 조회로 이동</a>
+          <a href="index.html" class="btn btn-primary" data-i18n="btn_goto_home">홈으로</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="foot-brand">OSAEK.W (오색.W)</div>
+    <div data-i18n="footer_org">모두의 창업 1기 시범 운영 서비스</div>
+    <div data-i18n="footer_contact">문의 이메일: (추후 기입)</div>
+    <div data-i18n="footer_copy">© 2026 OSAEK.W (오색.W)</div>
+  </div>
+</footer>
+
+<nav class="bottom-tabbar" aria-label="하단 탭 메뉴">
+  <a href="index.html" data-nav="home"><i class="fa-solid fa-house"></i><span data-i18n="tab_home">홈</span></a>
+  <a href="course-a.html" data-nav="courses"><i class="fa-solid fa-water"></i><span data-i18n="tab_courses">코스</span></a>
+  <a href="booking.html" data-nav="booking"><i class="fa-solid fa-calendar-check"></i><span data-i18n="tab_booking">예약</span></a>
+  <a href="my-booking.html" data-nav="my"><i class="fa-solid fa-ticket"></i><span data-i18n="tab_my">내 예약</span></a>
+</nav>
+
+<script>
+window.PAGE_DICT = {
+  ko: {
+    page_title:'예약하기', ind1:'코스', ind2:'날짜', ind3:'인원/정보', ind4:'신청자', ind5:'완료',
+    s1_title:'코스를 선택해 주세요', s1_desc:'두 코스 중 참여하실 프로그램을 골라주세요',
+    course_a_name:'코스 A · 댕댕오감학교', course_a_sub:'토요일 09:00 · 1인+1견 35,000원',
+    course_b_name:'코스 B · K-웰니스 부산워크', course_b_sub:'화·목·금 14:00 · 1인 120,000원',
+    btn_next:'다음', btn_back:'이전',
+    s2_title:'날짜를 선택해 주세요', s2_desc:'활성화된 날짜만 예약할 수 있습니다. 잔여석을 확인하세요.',
+    s3_title:'인원 및 세부 정보', s3_desc:'코스에 필요한 정보를 입력해 주세요',
+    lbl_people:'인원 (팀/명)',
+    lbl_pet_name:'반려견 이름', ph_pet_name:'예: 콩이', lbl_pet_breed:'견종', ph_pet_breed:'예: 말티즈',
+    lbl_pet_size:'반려견 크기', size_small:'소형', size_medium:'중형', size_large:'대형 (사전 문의)',
+    lbl_pet_vaccinated:'반려견 예방접종을 완료했으며, 발정기·공격성 이력이 없습니다 (필수)',
+    lbl_pet_sociality:'다른 강아지와의 사회성', soc_good:'좋음', soc_normal:'보통', soc_shy:'낯가림',
+    lbl_nationality:'국적', opt_select:'선택', opt_other:'기타',
+    lbl_guide_lang:'안내 언어', lang_jp:'日本語 (준비 중)', lang_cn:'中文 (준비 중)',
+    lbl_hanbok_size:'한복 사이즈',
+    lbl_diet:'식이 제한', diet_none:'없음', diet_veg:'베지테리언', diet_vegan:'비건', diet_halal:'할랄', diet_etc:'기타',
+    err_required:'필수 입력 항목입니다.',
+    s4_title:'신청자 정보', s4_desc:'예약 확인을 위한 연락처를 입력해 주세요',
+    lbl_name:'이름', lbl_phone:'연락처', ph_phone:'010-0000-0000', lbl_email:'이메일', ph_email:'name@email.com',
+    lbl_consent:'개인정보 수집 및 이용에 동의합니다 (필수)',
+    notice_payment:'본 예약은 시범 운영 신청이며, 결제는 현장에서 진행됩니다.',
+    btn_submit:'예약 신청하기',
+    s5_title:'예약이 완료되었습니다', s5_hint:'예약 조회 페이지에서 예약번호로 확인할 수 있습니다',
+    btn_goto_my:'예약 조회로 이동', btn_goto_home:'홈으로'
+  },
+  en: {
+    page_title:'Book Now', ind1:'Course', ind2:'Date', ind3:'Details', ind4:'Applicant', ind5:'Done',
+    s1_title:'Choose Your Course', s1_desc:'Select one of the two wellness programs',
+    course_a_name:'Course A · Doggie Sensory School', course_a_sub:'Sat 09:00 · ₩35,000 per person + dog',
+    course_b_name:'Course B · K-Wellness Busan Walk', course_b_sub:'Tue/Thu/Fri 14:00 · ₩120,000 per person',
+    btn_next:'Next', btn_back:'Back',
+    s2_title:'Choose a Date', s2_desc:'Only enabled dates can be booked. Check remaining seats.',
+    s3_title:'Participants & Details', s3_desc:'Please fill in the details required for your course',
+    lbl_people:'Participants (units)',
+    lbl_pet_name:'Dog Name', ph_pet_name:'e.g. Kong', lbl_pet_breed:'Breed', ph_pet_breed:'e.g. Maltese',
+    lbl_pet_size:'Dog Size', size_small:'Small', size_medium:'Medium', size_large:'Large (inquire in advance)',
+    lbl_pet_vaccinated:'My dog has completed vaccination, with no history of heat cycle or aggression (required)',
+    lbl_pet_sociality:'Sociability with other dogs', soc_good:'Good', soc_normal:'Normal', soc_shy:'Shy',
+    lbl_nationality:'Nationality', opt_select:'Select', opt_other:'Other',
+    lbl_guide_lang:'Guide Language', lang_jp:'日本語 (Coming Soon)', lang_cn:'中文 (Coming Soon)',
+    lbl_hanbok_size:'Hanbok Size',
+    lbl_diet:'Dietary Restriction', diet_none:'None', diet_veg:'Vegetarian', diet_vegan:'Vegan', diet_halal:'Halal', diet_etc:'Other',
+    err_required:'This field is required.',
+    s4_title:'Applicant Information', s4_desc:'Please provide contact information to confirm your booking',
+    lbl_name:'Name', lbl_phone:'Phone', ph_phone:'010-0000-0000', lbl_email:'Email', ph_email:'name@email.com',
+    lbl_consent:'I agree to the collection and use of personal information (required)',
+    notice_payment:'This is a pilot program booking. Payment will be made onsite.',
+    btn_submit:'Confirm Booking',
+    s5_title:'Booking Confirmed', s5_hint:'You can check your booking using your booking number on the My Booking page',
+    btn_goto_my:'Go to My Booking', btn_goto_home:'Go Home'
+  }
+};
+</script>
+<script src="js/common.js"></script>
+<script src="js/booking.js"></script>
+</body>
+</html>
