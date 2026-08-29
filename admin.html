@@ -2,28 +2,108 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<script src="js/site-gate.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
 <title>예약 관리자 | OSAEK.W</title>
-<link rel="icon" href="images/logo-icon.png">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
 <style>
-.admin-wrap{max-width:1180px;margin:0 auto;padding:42px 20px 90px}.admin-title{margin:0 0 8px;font-size:30px}.admin-sub{margin:0 0 28px;color:#81786c}.admin-warning{padding:12px 14px;margin-bottom:20px;border:1px solid #f0d7c8;border-radius:12px;background:#fff8f3;color:#7b5a48;font-size:13px;line-height:1.6}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}.admin-card{background:#fff;border:1px solid #e7dfd4;border-radius:18px;padding:22px;box-shadow:0 8px 26px rgba(46,37,29,.06)}.admin-card h2{margin:0 0 7px;font-size:19px}.admin-card p{margin:0 0 16px;color:#8a8375;font-size:13px}.dow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.dow-pill{position:relative}.dow-pill input{position:absolute;opacity:0;pointer-events:none}.dow-pill span{display:flex;align-items:center;justify-content:center;min-height:42px;border:1px solid #ded6cc;border-radius:10px;background:#fff;color:#5f584f;font-weight:700;cursor:pointer;transition:.15s}.dow-pill input:checked+span{border-color:#ef745c;background:#fff0e7;color:#d85f3d;box-shadow:0 3px 10px rgba(239,116,92,.12)}.admin-actions{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}.save-msg{font-size:13px;color:#478d89;font-weight:700}.list-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap}.filters{display:flex;gap:8px;flex-wrap:wrap}.admin-input,.admin-select{height:42px;border:1px solid #ded6cc;border-radius:10px;padding:0 12px;background:#fff;font:inherit}.admin-input{min-width:220px}.table-scroll{overflow:auto;border:1px solid #e7dfd4;border-radius:14px;background:#fff}.admin-table{width:100%;border-collapse:collapse;min-width:940px;font-size:13px}.admin-table th,.admin-table td{padding:12px 10px;border-bottom:1px solid #eee7de;text-align:left;vertical-align:top;white-space:nowrap}.admin-table th{position:sticky;top:0;background:#fbf8f3;color:#61594f;font-size:12px;z-index:1}.admin-table tr:last-child td{border-bottom:0}.status{display:inline-flex;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800}.status.confirmed{background:#e7f4f1;color:#257a70}.status.cancelled{background:#f4eeee;color:#9d5e5e}.course-badge{font-weight:800;color:#17324d}.empty-state{padding:35px;text-align:center;color:#8a8375}.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.summary-box{background:#fff;border:1px solid #e7dfd4;border-radius:12px;padding:14px}.summary-box strong{display:block;font-size:22px;color:#17324d}.summary-box span{font-size:12px;color:#8a8375}@media(max-width:760px){.admin-grid{grid-template-columns:1fr}.dow-grid{grid-template-columns:repeat(4,1fr)}.summary-strip{grid-template-columns:repeat(2,1fr)}.admin-input{min-width:100%;width:100%}}
+body{background:#fbf8f3}
+.admin-wrap{max-width:1180px;margin:auto;padding:36px 20px 80px}
+.admin-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-bottom:22px}
+.admin-auth{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.admin-auth input{height:42px;min-width:260px;border:1px solid #ded6cc;border-radius:10px;padding:0 12px;font:inherit}
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.cardx{background:#fff;border:1px solid #e7dfd4;border-radius:18px;padding:22px;box-shadow:0 8px 25px rgba(50,40,30,.05)}
+.dow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px;margin-top:14px}
+.dow-pill{position:relative}.dow-pill input{position:absolute;opacity:0}
+.dow-pill span{display:flex;min-height:44px;align-items:center;justify-content:center;border:1px solid #ded6cc;border-radius:10px;font-weight:700;cursor:pointer}
+.dow-pill input:checked+span{background:#fff0e7;border-color:#ef745c;color:#d85f3d}
+.capacity-row{display:flex;gap:8px;align-items:center;margin-top:14px}
+.capacity-row input{width:90px;height:40px;border:1px solid #ded6cc;border-radius:9px;padding:0 10px}
+.actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 32px}
+.list-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters input,.filters select{height:42px;border:1px solid #ded6cc;border-radius:10px;padding:0 12px;background:white}
+.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.sum{background:#fff;border:1px solid #e7dfd4;border-radius:12px;padding:14px}
+.sum strong{display:block;font-size:22px;color:#17324d}.sum span{font-size:12px;color:#8a8375}
+.table-scroll{overflow:auto;background:#fff;border:1px solid #e7dfd4;border-radius:14px}
+.admin-table{width:100%;min-width:1050px;border-collapse:collapse;font-size:13px}
+.admin-table th,.admin-table td{padding:12px 10px;border-bottom:1px solid #eee7de;text-align:left;white-space:nowrap}
+.admin-table th{background:#fbf8f3}
+.status{padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800}
+.status.confirmed{background:#e7f4f1;color:#257a70}.status.cancelled{background:#f4eeee;color:#9d5e5e}
+.smallbtn{border:1px solid #d7cec4;background:#fff;border-radius:8px;padding:6px 9px;cursor:pointer}
+.notice{padding:12px 14px;background:#fff8f3;border:1px solid #f0d7c8;border-radius:12px;color:#775849;font-size:13px;line-height:1.6;margin-bottom:20px}
+@media(max-width:760px){.admin-grid{grid-template-columns:1fr}.summary-strip{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
-<header class="site-header"><div class="container"><a href="index.html" class="brand"><img src="images/logo-icon.png" alt="OSAEK.W 로고"><span>OSAEK.W 예약 관리자<br><span class="brand-name-en">Booking Administration</span></span></a><nav class="gnb" aria-label="관리 메뉴"><ul class="gnb-links"><li><a href="index.html">홈</a></li><li><a href="booking.html">예약화면 보기</a></li></ul></nav></div></header>
 <main class="admin-wrap">
-<h1 class="admin-title">예약 관리자</h1><p class="admin-sub">코스별 예약 가능 요일을 지정하고 접수된 예약자를 확인합니다.</p>
-<div class="admin-warning"><strong>중요:</strong> 이 페이지는 현재 MVP용 관리자 화면입니다. <code>noindex</code>로 검색노출은 막았지만 별도의 관리자 로그인·서버 권한 인증은 없습니다. 실제 고객 개인정보를 운영할 때는 관리자 인증을 반드시 추가해야 합니다.</div>
-<section class="admin-grid" aria-label="운영요일 설정"><div class="admin-card"><h2>코스 A · 댕댕오감학교</h2><p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p><div class="dow-grid" id="dowA"></div></div><div class="admin-card"><h2>코스 B · K-웰니스 부산워크</h2><p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p><div class="dow-grid" id="dowB"></div></div></section>
-<div class="admin-actions" style="margin-bottom:34px;"><button type="button" class="btn btn-primary" id="saveScheduleBtn"><i class="fa-solid fa-floppy-disk"></i> 운영요일 저장</button><button type="button" class="btn btn-outline" id="reloadScheduleBtn">다시 불러오기</button><span class="save-msg" id="saveMsg" aria-live="polite"></span></div>
-<section><div class="list-head"><div><h2 style="margin:0 0 5px;">예약자 리스트</h2><p style="margin:0;color:#8a8375;font-size:13px;">예약번호, 날짜, 코스, 신청자 및 연락처를 확인할 수 있습니다.</p></div><div class="filters"><select class="admin-select" id="courseFilter"><option value="">전체 코스</option><option value="A">코스 A</option><option value="B">코스 B</option></select><select class="admin-select" id="statusFilter"><option value="">전체 상태</option><option value="확정">확정</option><option value="취소">취소</option></select><input class="admin-input" id="searchInput" type="search" placeholder="이름·연락처·예약번호 검색"><button type="button" class="btn btn-outline" id="refreshBtn">새로고침</button></div></div>
-<div class="summary-strip"><div class="summary-box"><strong id="countAll">0</strong><span>전체 예약</span></div><div class="summary-box"><strong id="countConfirmed">0</strong><span>확정 예약</span></div><div class="summary-box"><strong id="countA">0</strong><span>코스 A</span></div><div class="summary-box"><strong id="countB">0</strong><span>코스 B</span></div></div>
-<div class="table-scroll"><table class="admin-table"><thead><tr><th>예약번호</th><th>날짜</th><th>코스</th><th>인원</th><th>신청자</th><th>연락처</th><th>이메일</th><th>반려견/국적</th><th>상태</th></tr></thead><tbody id="bookingRows"><tr><td colspan="9" class="empty-state">예약 정보를 불러오는 중...</td></tr></tbody></table></div></section>
+  <div class="admin-head">
+    <div>
+      <h1 style="margin:0 0 6px;">OSAEK.W 예약 관리자</h1>
+      <p style="margin:0;color:#81786c;">예약 가능 요일·정원 관리 및 예약자 목록</p>
+    </div>
+    <div class="admin-auth">
+      <input type="password" id="adminToken" placeholder="관리자 인증키 입력">
+      <button class="btn btn-primary" type="button" id="authBtn">관리자 인증</button>
+      <a class="btn btn-outline" href="booking.html">예약화면 보기</a>
+    </div>
+  </div>
+
+  <div class="notice">
+    관리자 인증키는 GitHub 코드에 넣지 않습니다. Vercel의 <strong>ADMIN_API_TOKEN</strong> 환경변수와 같은 값을 이 화면에 입력하세요.
+  </div>
+
+  <section class="admin-grid">
+    <div class="cardx">
+      <h2>코스 A · 댕댕오감학교</h2>
+      <p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p>
+      <div class="dow-grid" id="dowA"></div>
+      <div class="capacity-row">정원 <input id="capacityA" type="number" min="1" max="100"> 팀/명</div>
+    </div>
+    <div class="cardx">
+      <h2>코스 B · K-웰니스 부산워크</h2>
+      <p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p>
+      <div class="dow-grid" id="dowB"></div>
+      <div class="capacity-row">정원 <input id="capacityB" type="number" min="1" max="100"> 팀/명</div>
+    </div>
+  </section>
+
+  <div class="actions">
+    <button class="btn btn-primary" type="button" id="saveScheduleBtn">운영요일·정원 저장</button>
+    <button class="btn btn-outline" type="button" id="refreshBtn">예약 목록 새로고침</button>
+    <span id="msg" style="font-weight:700;color:#478d89;"></span>
+  </div>
+
+  <section>
+    <div class="list-head">
+      <div><h2 style="margin:0 0 5px;">예약자 리스트</h2><p style="margin:0;color:#8a8375;font-size:13px;">관리자 인증 후 전체 예약을 확인합니다.</p></div>
+      <div class="filters">
+        <select id="courseFilter"><option value="">전체 코스</option><option value="A">코스 A</option><option value="B">코스 B</option></select>
+        <select id="statusFilter"><option value="">전체 상태</option><option value="확정">확정</option><option value="취소">취소</option></select>
+        <input type="search" id="searchInput" placeholder="이름·연락처·예약번호 검색">
+      </div>
+    </div>
+
+    <div class="summary-strip">
+      <div class="sum"><strong id="countAll">0</strong><span>전체 예약</span></div>
+      <div class="sum"><strong id="countConfirmed">0</strong><span>확정 예약</span></div>
+      <div class="sum"><strong id="countA">0</strong><span>코스 A</span></div>
+      <div class="sum"><strong id="countB">0</strong><span>코스 B</span></div>
+    </div>
+
+    <div class="table-scroll">
+      <table class="admin-table">
+        <thead><tr><th>예약번호</th><th>날짜</th><th>코스</th><th>인원</th><th>신청자</th><th>연락처</th><th>이메일</th><th>반려견/국적</th><th>상태</th><th>관리</th></tr></thead>
+        <tbody id="bookingRows"><tr><td colspan="10" style="padding:30px;text-align:center;">관리자 인증 후 표시됩니다.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
 </main>
-<script src="js/common.js"></script><script src="js/admin.js"></script>
-</body></html>
+<script src="js/admin.js"></script>
+</body>
+</html>
