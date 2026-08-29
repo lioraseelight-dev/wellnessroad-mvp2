@@ -3,137 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<script src="js/site-gate.js"></script>
-<title>관리자 대시보드 | 부산 5색 웰니스 워크</title>
 <meta name="robots" content="noindex, nofollow">
+<script src="js/site-gate.js"></script>
+<title>예약 관리자 | OSAEK.W</title>
 <link rel="icon" href="images/logo-icon.png">
-<link rel="apple-touch-icon" href="images/logo-icon.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#FBF8F3">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
 <link rel="stylesheet" href="css/style.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+.admin-wrap{max-width:1180px;margin:0 auto;padding:42px 20px 90px}.admin-title{margin:0 0 8px;font-size:30px}.admin-sub{margin:0 0 28px;color:#81786c}.admin-warning{padding:12px 14px;margin-bottom:20px;border:1px solid #f0d7c8;border-radius:12px;background:#fff8f3;color:#7b5a48;font-size:13px;line-height:1.6}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:28px}.admin-card{background:#fff;border:1px solid #e7dfd4;border-radius:18px;padding:22px;box-shadow:0 8px 26px rgba(46,37,29,.06)}.admin-card h2{margin:0 0 7px;font-size:19px}.admin-card p{margin:0 0 16px;color:#8a8375;font-size:13px}.dow-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}.dow-pill{position:relative}.dow-pill input{position:absolute;opacity:0;pointer-events:none}.dow-pill span{display:flex;align-items:center;justify-content:center;min-height:42px;border:1px solid #ded6cc;border-radius:10px;background:#fff;color:#5f584f;font-weight:700;cursor:pointer;transition:.15s}.dow-pill input:checked+span{border-color:#ef745c;background:#fff0e7;color:#d85f3d;box-shadow:0 3px 10px rgba(239,116,92,.12)}.admin-actions{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}.save-msg{font-size:13px;color:#478d89;font-weight:700}.list-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-end;margin-bottom:14px;flex-wrap:wrap}.filters{display:flex;gap:8px;flex-wrap:wrap}.admin-input,.admin-select{height:42px;border:1px solid #ded6cc;border-radius:10px;padding:0 12px;background:#fff;font:inherit}.admin-input{min-width:220px}.table-scroll{overflow:auto;border:1px solid #e7dfd4;border-radius:14px;background:#fff}.admin-table{width:100%;border-collapse:collapse;min-width:940px;font-size:13px}.admin-table th,.admin-table td{padding:12px 10px;border-bottom:1px solid #eee7de;text-align:left;vertical-align:top;white-space:nowrap}.admin-table th{position:sticky;top:0;background:#fbf8f3;color:#61594f;font-size:12px;z-index:1}.admin-table tr:last-child td{border-bottom:0}.status{display:inline-flex;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:800}.status.confirmed{background:#e7f4f1;color:#257a70}.status.cancelled{background:#f4eeee;color:#9d5e5e}.course-badge{font-weight:800;color:#17324d}.empty-state{padding:35px;text-align:center;color:#8a8375}.summary-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.summary-box{background:#fff;border:1px solid #e7dfd4;border-radius:12px;padding:14px}.summary-box strong{display:block;font-size:22px;color:#17324d}.summary-box span{font-size:12px;color:#8a8375}@media(max-width:760px){.admin-grid{grid-template-columns:1fr}.dow-grid{grid-template-columns:repeat(4,1fr)}.summary-strip{grid-template-columns:repeat(2,1fr)}.admin-input{min-width:100%;width:100%}}
+</style>
 </head>
-<body data-page="admin">
-<a href="#main" class="skip-link">본문으로 바로가기</a>
-
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand">
-      <img src="images/logo-icon.png" alt="부산 5색 웰니스 워크 로고">
-      <span>부산 5색 웰니스 워크<br><span class="brand-name-en">Busan 5-Color Wellness Walk</span></span>
-    </a>
-    <nav class="gnb" aria-label="주요 메뉴">
-      <ul class="gnb-links">
-        <li><a href="index.html" data-nav="home">홈</a></li>
-        <li><a href="course-a.html" data-nav="courses">코스 소개</a></li>
-        <li><a href="booking.html" data-nav="booking">예약하기</a></li>
-        <li><a href="my-booking.html" data-nav="my">예약 조회</a></li>
-      </ul>
-      <div class="lang-toggle" role="group" aria-label="언어 선택">
-        <button type="button" data-lang="ko">KO</button>
-        <button type="button" data-lang="en">EN</button>
-      </div>
-    </nav>
-  </div>
-</header>
-
-<main id="main">
-  <!-- 비밀번호 게이트 -->
-  <section class="admin-gate" id="adminGate">
-    <div class="admin-gate-box">
-      <i class="fa-solid fa-lock"></i>
-      <h2 style="margin-bottom:6px;">관리자 로그인</h2>
-      <p style="color:#8a8375; font-size:14px; margin-bottom:20px;">비밀번호를 입력해 관리자 대시보드에 접속하세요</p>
-      <form id="gateForm">
-        <input type="password" id="gatePassword" class="form-control" placeholder="비밀번호" style="margin-bottom:14px;" autocomplete="off">
-        <button type="submit" class="btn btn-navy btn-block">입장하기</button>
-        <div id="gateError" style="color:#c2542e; font-size:13px; margin-top:10px; display:none;">비밀번호가 올바르지 않습니다.</div>
-      </form>
-    </div>
-  </section>
-
-  <!-- 대시보드 본문 -->
-  <section class="section" id="adminDashboard" style="display:none; padding-top:36px;">
-    <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:12px;">
-        <h1 style="margin:0; font-size:26px;">관리자 대시보드</h1>
-        <div style="display:flex; gap:10px;">
-          <button type="button" class="btn btn-outline" id="refreshBtn"><i class="fa-solid fa-rotate"></i> 새로고침</button>
-          <button type="button" class="btn btn-outline" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> 로그아웃</button>
-        </div>
-      </div>
-
-      <div class="admin-summary">
-        <div class="admin-card">
-          <div class="num" id="statTotal">0</div>
-          <div class="lbl">총 예약 건수</div>
-        </div>
-        <div class="admin-card">
-          <div class="num" id="statA">0</div>
-          <div class="lbl">코스A 예약 수</div>
-          <div class="sub" id="statADogs">반려견 0마리</div>
-        </div>
-        <div class="admin-card">
-          <div class="num" id="statB">0</div>
-          <div class="lbl">코스B 예약 수</div>
-        </div>
-        <div class="admin-card">
-          <div class="num" id="statPeople">0</div>
-          <div class="lbl">총 참가 인원</div>
-        </div>
-      </div>
-
-      <div class="admin-chart-wrap">
-        <h3 style="text-align:center; font-size:15px; margin-bottom:16px;">코스별 예약 비중</h3>
-        <canvas id="courseChart" style="max-height:260px;"></canvas>
-      </div>
-
-      <div class="admin-toolbar">
-        <div class="admin-filters">
-          <select id="filterCourse">
-            <option value="">전체 코스</option>
-            <option value="A">코스A</option>
-            <option value="B">코스B</option>
-          </select>
-          <select id="filterDate">
-            <option value="">전체 날짜</option>
-          </select>
-          <select id="filterStatus">
-            <option value="">전체 상태</option>
-            <option value="확정">확정</option>
-            <option value="취소">취소</option>
-          </select>
-        </div>
-        <button type="button" class="btn btn-primary" id="csvDownloadBtn"><i class="fa-solid fa-file-arrow-down"></i> CSV 다운로드</button>
-      </div>
-
-      <div class="admin-table-wrap">
-        <table class="admin-table">
-          <thead>
-            <tr>
-              <th>예약번호</th><th>코스</th><th>날짜</th><th>인원</th><th>신청자</th><th>연락처</th>
-              <th>이메일</th><th>세부정보</th><th>상태</th><th>신청일시</th>
-            </tr>
-          </thead>
-          <tbody id="adminTableBody"></tbody>
-        </table>
-      </div>
-      <p id="emptyTableMsg" style="display:none; text-align:center; color:#9a9284; padding:30px 0;">표시할 예약이 없습니다.</p>
-    </div>
-  </section>
+<body>
+<header class="site-header"><div class="container"><a href="index.html" class="brand"><img src="images/logo-icon.png" alt="OSAEK.W 로고"><span>OSAEK.W 예약 관리자<br><span class="brand-name-en">Booking Administration</span></span></a><nav class="gnb" aria-label="관리 메뉴"><ul class="gnb-links"><li><a href="index.html">홈</a></li><li><a href="booking.html">예약화면 보기</a></li></ul></nav></div></header>
+<main class="admin-wrap">
+<h1 class="admin-title">예약 관리자</h1><p class="admin-sub">코스별 예약 가능 요일을 지정하고 접수된 예약자를 확인합니다.</p>
+<div class="admin-warning"><strong>중요:</strong> 이 페이지는 현재 MVP용 관리자 화면입니다. <code>noindex</code>로 검색노출은 막았지만 별도의 관리자 로그인·서버 권한 인증은 없습니다. 실제 고객 개인정보를 운영할 때는 관리자 인증을 반드시 추가해야 합니다.</div>
+<section class="admin-grid" aria-label="운영요일 설정"><div class="admin-card"><h2>코스 A · 댕댕오감학교</h2><p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p><div class="dow-grid" id="dowA"></div></div><div class="admin-card"><h2>코스 B · K-웰니스 부산워크</h2><p>선택한 요일만 고객 예약 달력에서 활성화됩니다.</p><div class="dow-grid" id="dowB"></div></div></section>
+<div class="admin-actions" style="margin-bottom:34px;"><button type="button" class="btn btn-primary" id="saveScheduleBtn"><i class="fa-solid fa-floppy-disk"></i> 운영요일 저장</button><button type="button" class="btn btn-outline" id="reloadScheduleBtn">다시 불러오기</button><span class="save-msg" id="saveMsg" aria-live="polite"></span></div>
+<section><div class="list-head"><div><h2 style="margin:0 0 5px;">예약자 리스트</h2><p style="margin:0;color:#8a8375;font-size:13px;">예약번호, 날짜, 코스, 신청자 및 연락처를 확인할 수 있습니다.</p></div><div class="filters"><select class="admin-select" id="courseFilter"><option value="">전체 코스</option><option value="A">코스 A</option><option value="B">코스 B</option></select><select class="admin-select" id="statusFilter"><option value="">전체 상태</option><option value="확정">확정</option><option value="취소">취소</option></select><input class="admin-input" id="searchInput" type="search" placeholder="이름·연락처·예약번호 검색"><button type="button" class="btn btn-outline" id="refreshBtn">새로고침</button></div></div>
+<div class="summary-strip"><div class="summary-box"><strong id="countAll">0</strong><span>전체 예약</span></div><div class="summary-box"><strong id="countConfirmed">0</strong><span>확정 예약</span></div><div class="summary-box"><strong id="countA">0</strong><span>코스 A</span></div><div class="summary-box"><strong id="countB">0</strong><span>코스 B</span></div></div>
+<div class="table-scroll"><table class="admin-table"><thead><tr><th>예약번호</th><th>날짜</th><th>코스</th><th>인원</th><th>신청자</th><th>연락처</th><th>이메일</th><th>반려견/국적</th><th>상태</th></tr></thead><tbody id="bookingRows"><tr><td colspan="9" class="empty-state">예약 정보를 불러오는 중...</td></tr></tbody></table></div></section>
 </main>
-
-<footer class="site-footer" style="padding-bottom:20px;">
-  <div class="container">
-    <div class="foot-brand">부산 5색 웰니스 워크</div>
-    <div>모두의 창업 1기 시범 운영 서비스</div>
-    <div>© 2026 부산 5색 웰니스 워크</div>
-  </div>
-</footer>
-
-<script src="js/common.js"></script>
-<script src="js/admin.js"></script>
-</body>
-</html>
+<script src="js/common.js"></script><script src="js/admin.js"></script>
+</body></html>
