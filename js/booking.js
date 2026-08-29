@@ -4,7 +4,7 @@
 (function () {
   const CAPACITY = { A: 20, B: 15 };
   const ALLOWED_DOW = { A: [6], B: [2, 4, 5] }; // 0=Sun ... 6=Sat / 화(2) 목(4) 금(5)
-  const RANGE_WEEKS = 8;
+  const RANGE_MONTHS = 12;
 
   const state = {
     step: 1,
@@ -88,8 +88,14 @@
 
     const bookings = await getBookingsCache();
     const today = startOfDay(new Date());
-    const rangeEnd = new Date(today);
-    rangeEnd.setDate(rangeEnd.getDate() + RANGE_WEEKS * 7);
+    // 현재 월을 포함해 총 12개월의 달력을 탐색할 수 있게 합니다.
+    // 예: 2026년 8월이면 2027년 7월까지 표시합니다.
+    // 지난 날짜는 기존처럼 예약할 수 없습니다.
+    const rangeEnd = new Date(
+      today.getFullYear(),
+      today.getMonth() + RANGE_MONTHS,
+      0
+    );
 
     if (!calMonthCursor) {
       calMonthCursor = new Date(today.getFullYear(), today.getMonth(), 1);
