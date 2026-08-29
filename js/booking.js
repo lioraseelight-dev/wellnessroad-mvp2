@@ -3,7 +3,9 @@
    ============================================================ */
 (function () {
   const CAPACITY = { A: 20, B: 15 };
-  const ALLOWED_DOW = { A: [6], B: [2, 4, 5] }; // 0=Sun ... 6=Sat / 화(2) 목(4) 금(5)
+  // 관리자 페이지에서 저장한 운영요일이 없을 때 사용할 기본값
+  const DEFAULT_ALLOWED_DOW = { A: [6], B: [2, 4, 5] }; // 0=일 ... 6=토
+  const SETTINGS_BOOKING_NO = 'BW-ADMIN-CONFIG';
   const RANGE_MONTHS = 12;
 
   const state = {
@@ -38,6 +40,33 @@
     return bookings
       .filter(b => b.course === course && b.date === dateStr && b.status !== '취소')
       .reduce((sum, b) => sum + (Number(b.people) || 0), 0);
+  }
+
+  // 관리자 페이지가 예약 테이블에 저장한 운영요일 설정을 읽습니다.
+  function getAllowedDowSettings(bookings) {
+    const fallback = { A: [...DEFAULT_ALLOWED_DOW.A], B: [...DEFAULT_ALLOWED_DOW.B] };
+    const config = (bookings || []).find(b =>
+      b.bookingNo === SETTINGS_BOOKING_NO && b.course === 'CONFIG'
+    );
+    if (!config || !config.petName) return fallback;
+
+    try {
+      const parsed = JSON.parse(config.petName);
+      const normalize = (value, defaultValue) => {
+        if (!Array.isArray(value)) return [...defaultValue];
+        return value.map(Number)
+          .filter(n => Number.isInteger(n) && n >= 0 && n <= 6)
+          .filter((n, idx, arr) => arr.indexOf(n) === idx)
+          .sort((a, b) => a - b);
+      };
+      return {
+        A: normalize(parsed.A, fallback.A),
+        B: normalize(parsed.B, fallback.B),
+      };
+    } catch (e) {
+      console.warn('운영요일 설정을 읽지 못해 기본 운영요일을 사용합니다.', e);
+      return fallback;
+    }
   }
 
   /* ---------------------- Step indicator ---------------------- */
@@ -88,9 +117,7 @@
 
     const bookings = await getBookingsCache();
     const today = startOfDay(new Date());
-    // 현재 월을 포함해 총 12개월의 달력을 탐색할 수 있게 합니다.
-    // 예: 2026년 8월이면 2027년 7월까지 표시합니다.
-    // 지난 날짜는 기존처럼 예약할 수 없습니다.
+    // 현재 월을 포함해 앞으로 총 12개월까지 탐색합니다.
     const rangeEnd = new Date(
       today.getFullYear(),
       today.getMonth() + RANGE_MONTHS,
@@ -121,7 +148,8 @@
 
     for (let i = 0; i < startWeekday; i++) html += `<div class="cal-day empty"></div>`;
 
-    const allowedDow = ALLOWED_DOW[state.course] || [];
+    const allowedDowSettings = getAllowedDowSettings(bookings);
+    const allowedDow = allowedDowSettings[state.course] || [];
     const capacity = CAPACITY[state.course] || 0;
 
     for (let day = 1; day <= lastDay.getDate(); day++) {
